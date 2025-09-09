@@ -1,0 +1,26 @@
+graph TD
+    subgraph Development
+        direction LR
+        FE_Devs[Front-End Developers] -- "Completed UI work" --> B_and_F_Integration["UI/API Integration (Potential bottleneck)"]
+        BE_Devs[Back-End Developers] -- "Completed API work" --> B_and_F_Integration
+    end
+
+    subgraph Waiting_for_QA
+        Queue[Work Queue (Major bottleneck)]
+    end
+    
+    subgraph Quality_Assurance
+        Testing[Testing Team (Understaffed/Overloaded)]
+    end
+
+    subgraph Other_Bottlenecks
+        Bugs[Bugs found by QA]
+        Feedback[Delayed Feedback Loop]
+    end
+
+    B_and_F_Integration --> Queue
+    Queue --> Testing
+    Testing -- "Finds bugs" --> Bugs
+    Bugs --> Feedback
+    Feedback -- "Delayed feedback" --> FE_Devs
+    Feedback -- "Delayed feedback" --> BE_Devs
